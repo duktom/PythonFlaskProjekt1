@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wykresy GUS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<h1>Diagram liniowy</h1>
+
+<form method="post">
+    <label>Lokacja:</label>
+    <select name="location">
+        {% for loc in locations %}
+        <option value="{{ loc }}" {% if loc == selected_location %}selected{% endif %}>
+            {{ loc }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label>Kategoria:</label>
+    <select name="category">
+        {% for cat in categories %}
+        <option value="{{ cat }}" {% if cat == selected_category %}selected{% endif %}>
+            {{ cat }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Rysuj wykres</button>
+</form>
+
+{% if selected_location %}
+<div class="chart">
+    <img src="{{ url_for('static', filename='plot.png') }}" alt="Wykres">
+</div>
+{% endif %}
+
+</body>
+</html>

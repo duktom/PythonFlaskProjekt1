@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 30px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+select, button {
+    margin-right: 15px;
+    padding: 5px;
+}
+
+.chart {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+}
