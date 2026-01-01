@@ -1,8 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 def load_data(csv_path):
     return pd.read_csv(csv_path, sep=";")
+
 
 def get_categories(df):
     categories = set()
@@ -10,6 +12,7 @@ def get_categories(df):
         if ";" in col and col.split(";")[1].isdigit():
             categories.add(col.split(";")[0])
     return sorted(categories)
+
 
 def plot_category(df, location, category, output_path):
     row = df[df["Nazwa"] == location].iloc[0]

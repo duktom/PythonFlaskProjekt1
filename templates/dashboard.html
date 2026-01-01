@@ -7,6 +7,11 @@
 </head>
 <body>
 
+<nav style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 20px; border-radius: 6px; margin-bottom: 20px;">
+    <span>Zalogowany jako: <strong>{{ current_user.username }}</strong></span>
+    <a href="{{ url_for('logout') }}" style="color: #d9534f; text-decoration: none; font-weight: bold;">Wyloguj się</a>
+</nav>
+
 <h1>Diagram liniowy</h1>
 
 <form method="post">
@@ -33,7 +38,7 @@
 
 {% if selected_location %}
 <div class="chart">
-    <img src="{{ url_for('static', filename='plot.png') }}" alt="Wykres">
+    <img src="{{ url_for('static', filename='diagrams/plot.png') }}" alt="Wykres">
 </div>
 {% endif %}
 
