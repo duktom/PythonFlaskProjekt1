@@ -1,7 +1,7 @@
 from config import Config
 from extensions import db, login_manager, bcrypt
 from database.models import User
-from plotter import load_data, get_categories, plot_category
+from plotter import load_data, get_categories, plot_category_multi_location
 from database.user_queries import create_user, get_user_by_username, check_user_password
 
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -87,25 +87,28 @@ def dashboard():
     locations = sorted(df["Nazwa"].unique())
     categories = get_categories(df)
 
-    selected_location = None
+    selected_locations = []
     selected_category = None
 
     if request.method == "POST":
-        selected_location = request.form["location"]
+        selected_locations = request.form.getlist("locations")
         selected_category = request.form["category"]
 
-        plot_category(
-            df,
-            selected_location,
-            selected_category,
-            PLOT_PATH
-        )
+        if not (1 <= len(selected_locations) <= 3):
+            flash("Wybierz od 1 do 3 lokacji", "incorrect")
+        else:
+            plot_category_multi_location(
+                df,
+                selected_locations,
+                selected_category,
+                PLOT_PATH
+            )
 
     return render_template(
         "dashboard.html",
         locations=locations,
         categories=categories,
-        selected_location=selected_location,
+        selected_locations=selected_locations,
         selected_category=selected_category
     )
 
